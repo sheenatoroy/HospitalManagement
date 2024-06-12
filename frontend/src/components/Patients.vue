@@ -50,44 +50,11 @@
         </div>
       </div>
   
-      <!-- Modal for Booking Appointment -->
-      <b-modal v-model:visible="showModal" title="Book Appointment">
-        <form @submit.prevent="bookAppointment">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input v-model="newAppointment.name" type="text" class="form-control" id="name" required>
-          </div>
-          <div class="form-group">
-            <label for="dob">Date of Birth</label>
-            <input v-model="newAppointment.dob" type="date" class="form-control" id="dob" required>
-          </div>
-          <div class="form-group">
-            <label for="condition">Condition</label>
-            <input v-model="newAppointment.condition" type="text" class="form-control" id="condition" required>
-          </div>
-          <div class="form-group">
-            <label for="doctor">Doctor</label>
-            <select v-model="newAppointment.doctor" class="form-control" id="doctor" required>
-              <option disabled value="">Please select one</option>
-              <option>Dr. Smith</option>
-              <option>Dr. Johnson</option>
-              <option>Dr. Williams</option>
-            </select>
-          </div>
-          <b-button type="submit" variant="primary">Book</b-button>
-          <b-button @click="showModal = false" variant="secondary">Cancel</b-button>
-        </form>
-      </b-modal>
     </div>
 </template>
 
 <script>
 /* eslint-disable vue/multi-word-component-names */
-export default {
-    name: 'Patients',
-  </template>
-  
-  <script>
   export default {
     name: 'PatientView',
     data() {
@@ -196,42 +163,3 @@ export default {
     margin-left: -1px;
 }
 </style>
-
-  }
-  </script>
-  
-  <style scoped>
-  .container {
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-  }
-  
-  .card {
-    background-color: #2c3e50;
-    width: 90%;
-    margin: 20px auto;
-    transition: transform 0.3s ease;
-  }
-  
-  .card-text {
-    color: #ffffff;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-danger {
-    background-color: rgb(239, 92, 92);
-    border-color: rgb(239, 92, 92);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    color: #ffffff;
-  }
-  
-  .btn-danger:hover {
-    background-color: darkred;
-    border-color: darkred;
-  }
-  </style>
-  

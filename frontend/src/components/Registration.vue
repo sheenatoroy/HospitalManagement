@@ -22,7 +22,6 @@
         <div class="form-field">
           <select v-model="account_type">
             <option disabled value="">Select Account Type</option>
-            <option value="admin">Admin</option>
             <option value="doctor">Doctor</option>
             <option value="patient">Patient</option>
           </select>

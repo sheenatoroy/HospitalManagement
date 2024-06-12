@@ -18,34 +18,37 @@
     </nav>
 
     <div class="admin-view">
-      <h1>DOCTOR'S MEDICAL RECORDS</h1>
-      <table class="record-table">
-        <thead>
-          <tr>
-            <th>Record ID</th>
-            <th>Patient Name</th>
-            <th>Condition</th>
-            <th>Treatment</th>
-            <th>Doctor</th>
-            <th>Notes</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="record in medicalRecords" :key="record.id">
-            <td>{{ record.id }}</td>
-            <td>{{ record.patientName }}</td>
-            <td>{{ record.dob }}</td>
-            <td>{{ record.condition }}</td>
-            <td>{{ record.treatment }}</td>
-            <td>{{ record.doctor }}</td>
-            <td>{{ record.notes }}</td>
-            <td><button @click="editRecord(record.id)" class="btn btn-primary">UPDATE</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
- 
+    <h1>DOCTOR'S MEDICAL RECORDS</h1>
+    <table class="record-table">
+      <thead>
+        <tr>
+          <th>Record ID</th>
+          <th>Patient Name</th>
+          <th>Date Appointment</th>
+          <th>Doctor</th>
+          <th>Purpose</th>
+          <th>Remarks</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="record in medicalRecords" :key="record.id">
+          <td>{{ record.id }}</td>
+          <td>{{ record.patient_name }}</td>
+          <td>{{ record.date_of_appointment }}</td>
+          <td>{{ record.doctor_name }}</td>
+          <td>{{ record.purpose }}</td>
+          <td>{{ record.remarks }}</td>
+          <td>
+            <button @click="openModal(record)" class="btn btn-primary">Remarks</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal for editing remarks -->
+    <Modal v-if="isModalOpen" @close="closeModal" :record="selectedRecord"></Modal>
+  </div>
 </template>
 
 <script>
@@ -54,24 +57,11 @@ export default {
   data() {
     return {
       medicalRecords: [
-        { 
-          id: 1, 
-          patientName: 'John Doe', 
-          dob: '1990-01-01', 
-          condition: 'Hypertension', 
-          treatment: 'Medication', 
-          doctor: 'Dr. Smith', 
-          notes: 'Follow up in 3 months' 
-        },
-        { 
-          id: 2, 
-          patientName: 'Jane Smith', 
-          dob: '1985-05-12', 
-          condition: 'Diabetes', 
-          treatment: 'Insulin therapy', 
-          doctor: 'Dr. Johnson', 
-          notes: 'Monitor blood sugar levels daily' 
-        }
+        { id: 1, patient_name: 'Nuela Jane Rabino', date_of_appointment: '2024-06-10', doctor_name: 'Daniel Villare', purpose: 'Follow up checkup'  },
+        { id: 2, patient_name: 'Raven San Juan',date_of_appointment: '2024-05-16', doctor_name: 'Abegil Tutor', purpose: 'Therapy'  },
+        { id: 3, patient_name: 'Justine Reyes',date_of_appointment: '2024-04-9', doctor_name: 'Roldan Valencia',purpose: 'Consultation'  },
+        { id: 4, patient_name: 'Robert Dela Peña',date_of_appointment: '2024-01-20', doctor_name: 'Daniel Villare', purpose: 'Laboratory' }
+
       ]
     };
   },
@@ -108,7 +98,7 @@ export default {
 }
 
 .navbar-item a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Styles for the admin view */
@@ -193,6 +183,7 @@ export default {
     gap: 2rem;
     padding: 0;
     margin: 0;
+    text-decoration: none;
   }
   
   .navbar-item {
@@ -218,6 +209,7 @@ export default {
   .navbar-link:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.5);
+    text-decoration: none;
   }
   
   @media (max-width: 768px) {

@@ -3,12 +3,7 @@
       <div class="container">
         <i class='bx bx-plus-medical' style="font-size: 3rem; color: white;"></i>
         <ul class="navbar-list">
-          <li class="navbar-item">
-            <router-link to="/patients" class="navbar-link">Patients</router-link>
-          </li>
-          <li class="navbar-item">
-            <router-link to="/doctors" class="navbar-link">Doctors</router-link>
-          </li>
+        
           <li class="navbar-item">
             <router-link to="/appointments" class="navbar-link">Appointments</router-link>
           </li>
@@ -21,31 +16,24 @@
         </ul>
       </div>
     </nav>
-        <div class="input-group mt-5">
-            <div class="input-group-append">
-            <button @click="bookAppointment" class="btn btn-primary">Book Appointment</button>
-            </div>
-        </div>
+            <h1 class="mt-5">HISTORY OF APPOINTMENTS</h1>
             <table class="table table-white table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Appointment Details</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Record ID</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Date of Appointment</th>
+                    <th scope="col">Selected Doctor</th>
+                    <th scope="col">Purpose</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(appointment, index) in patientAppointments" :key="appointment.id">
                     <th scope="row">{{ index + 1 }}</th>
-                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.details }}</td>
-                    <td v-else>
-                    <input v-model="updatedAppointment" class="form-control" />
-                    </td>
-                    <td>
-                    <button v-if="editAppointmentId === appointment.id" @click="updateAppointment(appointment.id)" class="btn btn-success me-2">Save</button>
-                    <button v-if="editAppointmentId !== appointment.id" @click="enableEditing(appointment)" class="btn btn-warning me-2">Edit</button>
-                    <button @click="cancelAppointment(appointment.id)" class="btn btn-danger">Cancel</button>
-                    </td>
+                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.patient_name }}</td>
+                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.date_of_appointment }}</td>
+                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.doctor_name }}</td>
+                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.purpose }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -65,10 +53,10 @@
         updatedAppointment: '',
         editAppointmentId: null,
         patientAppointments: [
-          { id: 1, details: 'Patient Appointment 1' },
-          { id: 2, details: 'Patient Appointment 2' },
-          { id: 3, details: 'Patient Appointment 3' },
-          { id: 4, details: 'Patient Appointment 4' }
+          { id: 1, patient_name: 'Sheena Jane B. Toroy', date_of_appointment: 'June 10, 2024', doctor_name: '', purpose: 'Follow up checkup'  },
+          { id: 2, patient_name: 'Daniel Villare',date_of_appointment: 'May 12, 2024', doctor_name: '', purpose: 'Therapy'  },
+          { id: 3, patient_name: 'Roldan Valencia',date_of_appointment: 'April 10, 2024', doctor_name: '',purpose: 'Consultation'  },
+          { id: 4, patient_name: 'Nicole Mae Velasco',date_of_appointment: 'January 9, 2024', doctor_name: '', purpose: 'Laboratory' }
         ],
         showModal: false,
         newAppointment: {

@@ -18,7 +18,7 @@
     </nav>
 
     <div class="admin-view">
-      <h1>All Records</h1>
+      <h1>DOCTOR'S MEDICAL RECORDS</h1>
       <table class="record-table">
         <thead>
           <tr>
@@ -29,6 +29,7 @@
             <th>Treatment</th>
             <th>Doctor</th>
             <th>Notes</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
             <td>{{ record.treatment }}</td>
             <td>{{ record.doctor }}</td>
             <td>{{ record.notes }}</td>
+            <td><button @click="editRecord(record.id)" class="btn btn-primary">UPDATE</button></td>
           </tr>
         </tbody>
       </table>
@@ -140,5 +142,22 @@ export default {
 .record-table tr:hover {
   background-color: #f0f0f0;
 }
-</style>
 
+/* Button Styles */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff; /* Blue */
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+</style>

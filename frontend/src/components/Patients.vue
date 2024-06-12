@@ -14,15 +14,13 @@
 /* eslint-disable vue/multi-word-component-names */
 export default {
     name: 'Patients',
-    export default {
-        data() {
-            return {
-                newAppointment: '',
-                patientAppointments: [
-                    { id: 1, details: 'Patient Appointment 1' },
-                    { id: 2, details: 'Patient Appointment 2' }
-                ]
-            };
+    data() {
+        return {
+            newAppointment: '',
+            patientAppointments: [
+                { id: 1, details: 'Patient Appointment 1' },
+                { id: 2, details: 'Patient Appointment 2' }
+            ]
         };
     },
     methods: {
@@ -36,6 +34,7 @@ export default {
             this.patientAppointments = this.patientAppointments.filter(app => app.id !== id);
         }
     }
+}
 </script>
 
 <style scoped>

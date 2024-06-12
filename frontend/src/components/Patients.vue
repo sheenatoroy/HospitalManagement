@@ -3,7 +3,7 @@
       <div class="container">
         <i class='bx bx-plus-medical' style="font-size: 3rem; color: white;"></i>
         <ul class="navbar-list">
-        
+            
           <li class="navbar-item">
             <router-link to="/appointments" class="navbar-link">Appointments</router-link>
           </li>
@@ -53,10 +53,10 @@
         updatedAppointment: '',
         editAppointmentId: null,
         patientAppointments: [
-          { id: 1, patient_name: 'Sheena Jane B. Toroy', date_of_appointment: 'June 10, 2024', doctor_name: '', purpose: 'Follow up checkup'  },
-          { id: 2, patient_name: 'Daniel Villare',date_of_appointment: 'May 12, 2024', doctor_name: '', purpose: 'Therapy'  },
-          { id: 3, patient_name: 'Roldan Valencia',date_of_appointment: 'April 10, 2024', doctor_name: '',purpose: 'Consultation'  },
-          { id: 4, patient_name: 'Nicole Mae Velasco',date_of_appointment: 'January 9, 2024', doctor_name: '', purpose: 'Laboratory' }
+          { id: 1, patient_name: 'Nuela Jane Rabino', date_of_appointment: 'June 10, 2024', doctor_name: 'Daniel Villare', purpose: 'Follow up checkup'  },
+          { id: 2, patient_name: 'Raven San Juan',date_of_appointment: 'May 12, 2024', doctor_name: 'Abegil Tutor', purpose: 'Therapy'  },
+          { id: 3, patient_name: 'Justine Reyes',date_of_appointment: 'April 10, 2024', doctor_name: 'Roldan Valencia',purpose: 'Consultation'  },
+          { id: 4, patient_name: 'Robert Dela Peña',date_of_appointment: 'January 9, 2024', doctor_name: 'Daniel Villare', purpose: 'Laboratory' }
         ],
         showModal: false,
         newAppointment: {

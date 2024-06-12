@@ -24,7 +24,6 @@
           <tr>
             <th>Record ID</th>
             <th>Patient Name</th>
-            <th>Date of Birth</th>
             <th>Condition</th>
             <th>Treatment</th>
             <th>Doctor</th>
@@ -75,6 +74,12 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    editRecord(id) {
+      // You can implement editRecord functionality here
+      console.log('Editing record with ID:', id);
+    }
   }
 }
 </script>

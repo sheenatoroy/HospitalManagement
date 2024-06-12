@@ -1,6 +1,7 @@
 <template>
     <nav class="navbar">
       <div class="container">
+        <i class='bx bx-plus-medical' style="font-size: 3rem; color: white;"></i>
         <ul class="navbar-list">
           <li class="navbar-item">
             <router-link to="/patients" class="navbar-link">Patients</router-link>
@@ -13,6 +14,9 @@
           </li>
           <li class="navbar-item">
             <router-link to="/medical-records" class="navbar-link">Medical Records</router-link>
+          </li>
+          <li class="navbar-item">
+            <router-link to="/medical-records" class="navbar-link">Logout</router-link>
           </li>
         </ul>
       </div>
@@ -30,9 +34,9 @@
   <style scoped>
   .navbar {
     background-color: #2c3e50;
-    padding: 1rem 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
+    margin-top: -4%
   }
   
   .navbar:hover {

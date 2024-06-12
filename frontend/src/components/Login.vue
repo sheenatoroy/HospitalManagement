@@ -1,6 +1,7 @@
 <template>
   <div class="login-form">
-    <h2>Login Form</h2>
+    <i class='bx bx-plus-medical' style="font-size: 5rem;"></i>
+    <h3 style="font-size: 2rem;">HOSPITAL NG KABUYAW</h3>
     <form @submit.prevent="login">
       <input type="email" v-model="email" placeholder="Email" required>
       <input type="password" v-model="password" placeholder="Password" required>
@@ -67,7 +68,7 @@ export default {
 
 <style scoped>
 .login-form {
-  max-width: 300px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -110,5 +111,11 @@ export default {
 
 p {
   text-align: center;
+}
+
+h3{
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ 
 }
 </style>

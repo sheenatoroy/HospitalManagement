@@ -29,7 +29,7 @@ export default {
         case 'nicolemaevelasco@gmail.com':
           this.checkAccountType('patient');
           break;
-        case 'danievillare@gmail.com':
+        case 'danielvillare@gmail.com':
           this.checkAccountType('doctor');
           break;
         case 'toroysheena@gmail.com':

@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <button @click="goBack" class="btn btn-secondary mb-4">Back</button>
     <h1 class="mb-4 text-center text-primary">Doctor Appointments</h1>
-    <button @click="addAppointmentModal" class="btn btn-primary mb-4">Add Appointment</button>
+    <router-link to="/patients" class="btn btn-primary mb-4">Patients History</router-link>
     <div v-if="doctorAppointments.length" class="table-responsive">
       <table class="table table-striped table-bordered">
         <thead class="bg-primary text-white">
@@ -61,11 +61,10 @@ export default {
   data() {
     return {
       doctorAppointments: [
-        { id: 1, details: 'Doctor Appointment 1' },
-        { id: 2, details: 'Doctor Appointment 2' },
-        { id: 3, details: 'Doctor Appointment 3' },
-        { id: 4, details: 'Doctor Appointment 4' },
-        { id: 5, details: 'Doctor Appointment 5' }
+        { id: 1, details: 'Follow up checkup for Ms. Sheena' },
+        { id: 2, details: 'Therapy for Mr. Daniel' },
+        { id: 3, details: 'Consultation for Mr. Roldan' },
+        { id: 4, details: 'Laboratory Schedule for Ms. Nicole' },
       ],
       appointmentDetails: '',
       showModal: false,

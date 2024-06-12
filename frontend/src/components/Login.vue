@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <h2>Login</h2>
+    <h2>Login Form</h2>
     <form @submit.prevent="login">
       <input type="email" v-model="email" placeholder="Email" required>
       <input type="password" v-model="password" placeholder="Password" required>
@@ -13,9 +13,8 @@
 
 <script>
 /* eslint-disable vue/multi-word-component-names */
-
 export default {
-  name: 'Login',
+  name: 'LoginForm',
   data() {
     return {
       email: '',
@@ -25,39 +24,45 @@ export default {
   },
   methods: {
     login() {
-      const userData = {
-        email: this.email,
-        password: this.password
-      };
+      // Check email against predefined accounts
+      switch (this.email) {
+        case 'nicolemaevelasco@gmail.com':
+          this.checkAccountType('patient');
+          break;
+        case 'danievillare@gmail.com':
+          this.checkAccountType('doctor');
+          break;
+        case 'toroysheena@gmail.com':
+          this.checkAccountType('admin');
+          break;
+        default:
+          this.errorMessage = 'Invalid email or password';
+      }
+    },
+    checkAccountType(accountType) {
+      // Here you can handle authentication logic, such as checking password, etc.
+      // For simplicity, I'm just setting account type here.
+      // You might want to call an API for authentication.
+      // For now, I'm just setting a dummy token and redirecting to respective pages.
+      const token = 'dummyToken';
 
-      // Make API call to login endpoint
-      fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(userData)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Handle successful login response
-        console.log('Login successful', data);
-        // Redirect the user or perform other actions
-      })
-      .catch(error => {
-        // Handle login error
-        console.error('Login error', error);
-        this.errorMessage = 'Invalid email or password';
-      });
+      switch (accountType) {
+        case 'patient':
+          // Assuming '/patient' is the route for patient dashboard
+          this.$router.push({ path: '/patients', query: { token } });
+          break;
+        case 'doctor':
+          // Assuming '/doctor' is the route for doctor dashboard
+          this.$router.push({ path: '/doctors', query: { token } });
+          break;
+        case 'admin':
+          // Assuming '/admin' is the route for admin dashboard
+          this.$router.push({ path: '/dashboard', query: { token } });
+          break;
+      }
     }
   }
-}
+};
 </script>
 
 <style scoped>

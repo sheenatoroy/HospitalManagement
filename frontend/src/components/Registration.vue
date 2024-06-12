@@ -37,10 +37,9 @@
 </template>
 
 <script>
-import axios from '@/lib/axios'; // Ensure correct path to axios
-
+/* eslint-disable vue/multi-word-component-names */
 export default {
-  name: 'UserRegistration',
+  name: 'RegistrationForm',
   data() {
     return {
       name: '',
@@ -51,31 +50,24 @@ export default {
     };
   },
   methods: {
-    async register() {
-      try {
-        const response = await axios.post("http://127.0.0.1:8000/api/create", {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          password_confirmation: this.password_confirmation,
-          account_type: this.account_type
-        });
-        if( response.status != 201){ console.log(response) }
-
-        alert("Registration Successful");
+    register() {
+      if (this.name && this.email && this.password && this.password_confirmation && this.account_type) {
+        // All fields are filled, registration successful
+        alert('Registration Successful!');
 
         this.name = "";
         this.email = "";
         this.password = "";
         this.password_confirmation = "";
         this.account_type = "";
-      } catch (error) {
-        console.log(error);
-        alert('Error registering: ', error);
+        // Here you can add code to submit the registration data to your server
+      } else {
+        // Missing credentials, show alert
+        alert('Missing credentials!');
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

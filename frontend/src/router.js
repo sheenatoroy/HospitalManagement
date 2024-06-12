@@ -5,6 +5,7 @@ import Patients from './components/Patients.vue';
 import Doctors from './components/Doctors.vue';
 import Appointments from './components/Appointments.vue';
 import MedicalRecords from './components/MedicalRecords.vue';
+import MedicalRecordsPatients from './components/MedicalRecordsPatient.vue';
 import Registration from './components/Registration.vue';
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
   { path: '/doctors', component: Doctors },
   { path: '/appointments', component: Appointments },
   { path: '/medical-records', component: MedicalRecords },
+  { path: '/medical-records1', component: MedicalRecordsPatients },
   { path: '/registration', component: Registration },
 ];
 

@@ -1,174 +1,124 @@
 <template>
-    <div class="container mt-5">
-      <button @click="goBack" class="btn btn-secondary mb-4">Back</button>
-      <h1 class="mb-4 text-center text-primary">Doctor Appointments</h1>
-      <div v-if="doctorAppointments.length" class="row row-cols-1 row-cols-md-2 g-4">
-        <div
-          v-for="appointment in doctorAppointments"
-          :key="appointment.id"
-          class="col"
-        >
-          <div
-            class="card h-100 shadow-sm border-primary animate__animated animate__fadeInUp"
-          >
-            <div class="card-body">
-              <h5 class="card-title">Appointment {{ appointment.id }}</h5>
-              <p class="card-text">{{ appointment.details }}</p>
-              <button
-                @click="cancelAppointment(appointment.id)"
-                class="btn btn-danger"
-              >
-                Cancel
-              </button>
-            </div>
+  <div class="container mt-5">
+    <button @click="goBack" class="btn btn-secondary mb-4">Back</button>
+    <h1 class="mb-4 text-center text-primary">Doctor Appointments</h1>
+    <button @click="addAppointmentModal" class="btn btn-primary mb-4">Add Appointment</button>
+    <div v-if="doctorAppointments.length" class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>ID</th>
+            <th>Details</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="appointment in doctorAppointments" :key="appointment.id">
+            <td>{{ appointment.id }}</td>
+            <td>{{ appointment.details }}</td>
+            <td>
+              <button @click="editAppointmentModal(appointment)" class="btn btn-warning btn-sm">Edit</button>
+              <button @click="deleteAppointmentModal(appointment.id)" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-else class="text-center">
+      <p>No appointments available.</p>
+    </div>
+
+    <!-- Add/Edit Appointment Modal -->
+    <div class="modal" :class="{ 'show': showModal }" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">{{ modalTitle }}</h5>
+            <button type="button" class="close" @click="closeModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </div>
-      </div>
-      <div v-else class="text-center">
-        <p>No appointments available.</p>
-      </div>
-  
-      <!-- Cancel Confirmation Modal -->
-      <div
-        class="modal fade"
-        id="cancelModal"
-        tabindex="-1"
-        aria-labelledby="cancelModalLabel"
-        aria-hidden="true"
-        @hidden="onModalHidden"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-              <h5 class="modal-title" id="cancelModalLabel">Confirm Cancellation</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to cancel this appointment?
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                @click="confirmCancel"
-              >
-                Cancel Appointment
-              </button>
-            </div>
+          <div class="modal-body">
+            <form @submit.prevent="saveAppointment">
+              <div class="form-group">
+                <label for="details">Details</label>
+                <input type="text" class="form-control" id="details" v-model="appointmentDetails">
+              </div>
+              <button type="submit" class="btn btn-primary">{{ modalAction }}</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'DoctorAppointments',
-    data() {
-      return {
-        doctorAppointments: [
-          { id: 1, details: 'Doctor Appointment 1' },
-          { id: 2, details: 'Doctor Appointment 2' },
-          { id: 3, details: 'Doctor Appointment 3' },
-          { id: 4, details: 'Doctor Appointment 4' },
-          { id: 5, details: 'Doctor Appointment 5' },
-        ],
-        appointmentToCancel: null,
-      };
+  </div>
+</template>
+
+<script>
+// eslint-disable-next-line
+/* eslint-disable */
+export default {
+  name: 'DoctorAppointments',
+  data() {
+    return {
+      doctorAppointments: [
+        { id: 1, details: 'Doctor Appointment 1' },
+        { id: 2, details: 'Doctor Appointment 2' },
+        { id: 3, details: 'Doctor Appointment 3' },
+        { id: 4, details: 'Doctor Appointment 4' },
+        { id: 5, details: 'Doctor Appointment 5' }
+      ],
+      appointmentDetails: '',
+      showModal: false,
+      modalTitle: '',
+      modalAction: '',
+      currentAppointment: null,
+    };
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
-    methods: {
-      goBack() {
-        this.$router.go(-1);
-      },
-      cancelAppointment(id) {
-        this.doctorAppointments = this.doctorAppointments.filter(
-          (app) => app.id !== id
-        );
-      },
-      onModalHidden() {
-        this.appointmentToCancel = null;
-      },
+    addAppointmentModal() {
+      this.modalTitle = 'Add Appointment';
+      this.modalAction = 'Add';
+      this.appointmentDetails = '';
+      this.showModal = true;
     },
-  };
-  </script>
-  
-  <style scoped>
-  .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    editAppointmentModal(appointment) {
+      this.modalTitle = 'Edit Appointment';
+      this.modalAction = 'Save';
+      this.appointmentDetails = appointment.details;
+      this.currentAppointment = appointment;
+      this.showModal = true;
+    },
+    deleteAppointmentModal(id) {
+      this.currentAppointment = id;
+      this.showModal = true;
+    },
+    saveAppointment() {
+      if (this.modalAction === 'Add') {
+        const newId = this.doctorAppointments.length + 1;
+        this.doctorAppointments.push({ id: newId, details: this.appointmentDetails });
+      } else {
+        const index = this.doctorAppointments.findIndex(app => app.id === this.currentAppointment.id);
+        this.doctorAppointments[index].details = this.appointmentDetails;
+      }
+      this.closeModal();
+    },
+    closeModal() {
+      this.showModal = false;
+    },
+    confirmDelete() {
+      const index = this.doctorAppointments.findIndex(app => app.id === this.currentAppointment);
+      this.doctorAppointments.splice(index, 1);
+      this.closeModal();
+    }
   }
-  
-  .text-primary {
-    color: #007bff;
-  }
-  
-  .bg-primary {
-    background-color: #007bff;
-  }
-  
-  .text-white {
-    color: #fff;
-  }
-  
-  .border-primary {
-    border-color: #007bff;
-  }
-  
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #5a6268;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .modal-content {
-    border-radius: 0.5rem;
-  }
-  
-  .modal-header {
-    border-bottom: none;
-  }
-  
-  .modal-footer {
-    border-top: none;
-  }
-  </style>
-  
+};
+</script>
+
+
+
+<style scoped>
+
+</style>

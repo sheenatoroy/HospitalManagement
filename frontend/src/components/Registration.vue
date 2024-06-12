@@ -53,27 +53,26 @@ export default {
   methods: {
     async registerUser() {
       try {
-        const response = await axios.post('/api/create', {
+          await axios.post("http://127.0.0.1:8000/api/create",{
+          
           name: this.name,
           email: this.email,
           password: this.password,
           password_confirmation: this.password_confirmation,
           account_type: this.account_type
-        });
 
-        if (response.status === 201) {
-          // Reset fields
-          this.name = '';
-          this.email = '';
-          this.password = '';
-          this.password_confirmation = '';
-          this.account_type = '';
-          alert('New account created.');
-          this.$router.go(-1);
-        }
+          });
+
+          alert("Registration Sucessful");
+   
+          this.name = "";
+          this.email = "";
+          this.password = "";
+          this.password_confirmation = "";
+          this.account_type = "";
       } catch (error) {
         console.log(error);
-        alert('Registration failed. Please try again.');
+        alert('Error registering: ', error);
       }
     }
   }

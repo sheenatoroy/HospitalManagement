@@ -30,10 +30,10 @@
                 <tbody>
                 <tr v-for="(appointment, index) in patientAppointments" :key="appointment.id">
                     <th scope="row">{{ index + 1 }}</th>
-                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.patient_name }}</td>
-                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.date_of_appointment }}</td>
-                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.doctor_name }}</td>
-                    <td v-if="editAppointmentId !== appointment.id">{{ appointment.purpose }}</td>
+                    <td>{{ appointment.patient_name }}</td>
+                    <td>{{ appointment.date_of_appointment }}</td>
+                    <td>{{ appointment.doctor_name }}</td>
+                    <td>{{ appointment.purpose }}</td>
                 </tr>
                 </tbody>
             </table>

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import axios from 'axios'; // Ensure correct path to axios
+import axios from '@/lib/axios'; // Ensure correct path to axios
 
 export default {
   name: 'UserRegistration',

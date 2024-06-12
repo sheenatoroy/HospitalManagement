@@ -1,70 +1,85 @@
 <template>
-    <div>
-      <h2>Registration</h2>
-      <form @submit.prevent="registerUser">
-        <div>
-          <label for="account_type">Account Type:</label>
-          <select id="account_type" v-model="formData.accountType" required>
-            <option value="">Select Account Type</option>
+  <div class="splitter-container">
+    <div class="wrapper">
+      <div class="logo">
+      </div>
+      <div class="text-center name">
+        User Registration
+      </div>
+      <form @submit.prevent="registerUser" class="form">
+        <div class="form-field">
+          <input type="text" name="name" v-model="name" placeholder="Name">
+        </div>
+        <div class="form-field">
+          <input type="email" name="email" v-model="email" placeholder="Email">
+        </div>
+        <div class="form-field">
+          <input type="password" name="password" v-model="password" placeholder="Password">
+        </div>
+        <div class="form-field">
+          <input type="password" name="password_confirmation" v-model="password_confirmation" placeholder="Confirm Password">
+        </div>
+        <div class="form-field">
+          <select v-model="account_type">
+            <option disabled value="">Select Account Type</option>
             <option value="admin">Admin</option>
             <option value="doctor">Doctor</option>
             <option value="patient">Patient</option>
-            <!-- Add more options as needed -->
           </select>
         </div>
-        <div>
-          <label for="name">Name:</label>
-          <input type="text" id="name" v-model="formData.name" required />
-        </div>
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="formData.email" required />
-        </div>
-        <div>
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="formData.password" required />
-        </div>
-        <div>
-          <label for="confirmPassword">Confirm Password:</label>
-          <input type="password" id="confirmPassword" v-model="formData.confirmPassword" required />
-        </div>
-        <button type="submit">Register</button>
+        <button type="submit" class="btn">Register</button>
       </form>
+      <div class="text-center">
+        <p>Already have an account? <router-link to="/" class="link-sign">Login here!</router-link></p>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  /* eslint-disable vue/multi-word-component-names */
+  </div>
+</template>
 
-  import axios from 'axios';
-  
-  export default {
-    name: 'Registration',
-    data() {
-      return {
-        formData: {
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          accountType: ''
+<script>
+import axios from '@/lib/axios';
+
+export default {
+  name: 'UserRegistration',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+      account_type: ''
+    };
+  },
+  methods: {
+    async registerUser() {
+      try {
+        const response = await axios.post('/api/create', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+          account_type: this.account_type
+        });
+
+        if (response.status === 201) {
+          // Reset fields
+          this.name = '';
+          this.email = '';
+          this.password = '';
+          this.password_confirmation = '';
+          this.account_type = '';
+          alert('New account created.');
+          this.$router.go(-1);
         }
-      };
-    },
-    methods: {
-      async registerUser() {
-        try {
-            const response = await axios.post('http://localhost:8080/api/register', this.formData);
-            console.log(response.data); // Handle success message or redirect here
-        } catch (error) {
-          console.error(error.response.data); // Handle error message display
-        }
+      } catch (error) {
+        console.log(error);
+        alert('Registration failed. Please try again.');
       }
     }
-  };
-  </script>
-  
-  <style scoped>
-  /* Your CSS styles here */
-  </style>
-  
+  }
+};
+</script>
+
+<style scoped>
+/* Your CSS styles here */
+</style>

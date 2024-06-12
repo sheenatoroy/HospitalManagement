@@ -16,7 +16,7 @@
             <router-link to="/medical-records" class="navbar-link">Medical Records</router-link>
           </li>
           <li class="navbar-item">
-            <router-link to="/medical-records" class="navbar-link">Logout</router-link>
+            <router-link to="/" class="navbar-link">Logout</router-link>
           </li>
         </ul>
       </div>

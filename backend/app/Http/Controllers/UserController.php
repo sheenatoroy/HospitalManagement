@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
     public function register(Request $request)
-    {
-        // Validate the incoming request data
+    { 
+        try {
+            // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users|max:255',
@@ -28,5 +30,8 @@ class UserController extends Controller
 
         // Return a response indicating success
         return response()->json(['message' => 'User registered successfully'], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th]);
+        }
     }
 }

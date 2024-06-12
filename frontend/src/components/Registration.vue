@@ -53,13 +53,14 @@ export default {
   methods: {
     async register() {
       try {
-        await axios.post("http://127.0.0.1:8000/api/create", {
+        const response = await axios.post("http://127.0.0.1:8000/api/create", {
           name: this.name,
           email: this.email,
           password: this.password,
           password_confirmation: this.password_confirmation,
           account_type: this.account_type
         });
+        if( response.status != 201){ console.log(response) }
 
         alert("Registration Successful");
 

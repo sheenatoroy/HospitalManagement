@@ -6,7 +6,7 @@
       <div class="text-center name">
         User Registration
       </div>
-      <form @submit.prevent="registerUser" class="form">
+      <form @submit.prevent="register" class="form">
         <div class="form-field">
           <input type="text" name="name" v-model="name" placeholder="Name">
         </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import axios from '@/lib/axios';
+import axios from 'axios'; // Ensure correct path to axios
 
 export default {
   name: 'UserRegistration',
@@ -51,25 +51,23 @@ export default {
     };
   },
   methods: {
-    async registerUser() {
+    async register() {
       try {
-          await axios.post("http://127.0.0.1:8000/api/create",{
-          
+        await axios.post("http://127.0.0.1:8000/api/create", {
           name: this.name,
           email: this.email,
           password: this.password,
           password_confirmation: this.password_confirmation,
           account_type: this.account_type
+        });
 
-          });
+        alert("Registration Successful");
 
-          alert("Registration Sucessful");
-   
-          this.name = "";
-          this.email = "";
-          this.password = "";
-          this.password_confirmation = "";
-          this.account_type = "";
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.password_confirmation = "";
+        this.account_type = "";
       } catch (error) {
         console.log(error);
         alert('Error registering: ', error);

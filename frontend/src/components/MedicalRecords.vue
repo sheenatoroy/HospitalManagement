@@ -1,6 +1,9 @@
 <template>
     <div>
-        <!-- Your appointments component content here -->
+        <h1>Admin View</h1>
+        <div v-for="record in medicalRecords" :key="record.id">
+            <p>{{ record.details }}</p>
+        </div>
     </div>
 </template>
 
@@ -8,7 +11,14 @@
 /* eslint-disable vue/multi-word-component-names */
 export default {
     name: 'MedicalRecords',
-    // Component logic goes here
+    data() {
+      return {
+        medicalRecords: [
+          { id: 1, details: 'Medical Record 1' },
+          { id: 2, details: 'Medical Record 2' }
+        ]
+      };
+    }
 }
 </script>
 

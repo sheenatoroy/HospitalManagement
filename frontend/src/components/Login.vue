@@ -8,7 +8,7 @@
       <button type="submit">Login</button>
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </form>
-    <p>Don't have an account? <router-link :to="{ path: '/registration' }">Register</router-link></p>
+    <p>Don't have an account? <router-link :to="{ path: '/registration' }">Register here</router-link></p>
   </div>
 </template>
 
@@ -71,7 +71,7 @@ export default {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 20px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
@@ -84,8 +84,8 @@ export default {
 .login-form input[type="password"] {
   width: 100%;
   margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 20px;
+  border-radius: 10px;
   border: 1px solid #ccc;
 }
 
@@ -105,8 +105,8 @@ export default {
 
 .error-message {
   color: #ff0000;
-  margin-top: 5px;
-  text-align: center;
+  margin-top: 10px;
+  text-align: left;
 }
 
 p {
